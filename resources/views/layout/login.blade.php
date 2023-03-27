@@ -139,6 +139,12 @@
                     <label>Enter Password</label>
                     <input type="password" name="password" class="form-control" />
                 </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="remember_me" value="1" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Remember Me
+                    </label>
+                </div>
                 <div class="form-group">
                     <p class="text-danger" for="">If you no ccount, please registration first! <a href="{{ route('user.registration') }}">Click Here</a></p>
                 </div>

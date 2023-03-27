@@ -49,7 +49,10 @@
     <?php
         $cookie_id = session()->getId();
         setcookie($cookie_id, 'Klassy Cafe', 1440);
+        $value = Cookie::get('COOKIE_NAME')
     ?>
+    {{-- {{ $cookie_id }} --}}
+    {{ $value }}
 
     <!-- About Start -->
     <div class="container-fluid py-5">

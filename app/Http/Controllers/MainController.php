@@ -20,15 +20,27 @@ class MainController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-        if (Auth::guard('web')->attempt([
-            'email' => $request->email,
-            'password' => $request->password,
-        ])) {
-            // return redirect('main/successlogin');
+        $remember_me = $request->has('remember_me') ? true : false;
+        if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $remember_me))
+        {
             return redirect('products');
-        } else {
-            return back()->withErrors('Your Email or Password is wrong|');
+            // $user = auth()->user();
+            // dd($user);
+        }else{
+            return back()->with('error','your username and password are wrong.');
         }
+        // if (Auth::guard('web')->attempt([
+        //     'email' => $request->email,
+        //     'password' => $request->password,
+        // ])) {
+        //     // return redirect('main/successlogin');
+        //     return redirect('products');
+        // } else {
+        //     return back()->withErrors('Your Email or Password is wrong|');
+        // }
+
+
+
         // $this->validate($request, [
         //     'email'   => 'required|email',
         //     // 'password'  => 'required|alphaNum|min:3',

@@ -136,3 +136,17 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+Route::group(['prefix' => 'admin', 'namespace' => '\App\Http\Controllers\Admin'], function () {
+    Route::get('/', 'AdminController@adminLogin')->name('admin.login');
+    Route::post('/loginCheck', 'AdminController@adminLoginCheck')->name('admin.loginCheck');
+    Route::middleware('auth:admin')->group(function () {
+        Route::get('/dashboard', 'AdminController@adminDashboard')->name('admin.dashboard');
+        Route::post('/admin/logout', 'AdminController@adminLogout')->name('admin.logout');
+        Route::resource('category', 'CategoryController');
+        Route::post('/get_categories', 'CategoryController@getCategories');
+        Route::resource('product', 'ProductController');
+        Route::post('/get_products', 'ProductController@getProducts');
+    });
+});

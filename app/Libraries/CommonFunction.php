@@ -38,6 +38,22 @@ class CommonFunction
         }
     }
 
+    public static function file_upload($request, $file_name, $upload_dir)
+    {
+        if ($request->hasFile($file_name)) {
+            $file = $request->$file_name;
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $up_path = "uploads/" . date('Y-m') . "/$upload_dir/";
+            $path = $file->move($up_path, $filename);
+            if ($file->getError()) {
+                $request->session()->flash('warning', $file->getErrorMessage());
+                return false;
+            }
+
+            return $path;
+        }
+    }
+
     public static function getbedImageFromURL($db_path, $local_path=null, $id=null, $width='100px', $height ='100px')
     {
         $file_path = (string)($local_path.$db_path);
@@ -89,21 +105,6 @@ class CommonFunction
             $param = substr($param, 8, $j - 9);
         }
         return $msg . $param;
-    }
-
-    public static function file_upload($request, $file_name, $upload_dir)
-    {
-        if ($request->hasFile($file_name)) {
-            $file = $request->$file_name;
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $up_path = "assets/uploads/".date('Y-m')."/$upload_dir/";
-            $path = $file->move($up_path, $filename);
-            if ($file->getError()) {
-                $request->session()->flash('warning', $file->getErrorMessage());
-                return false;
-            }
-            return $path;
-        }
     }
 
 }

@@ -43,7 +43,7 @@ class CategoryController extends Controller
             'name' => 'required|max:255',
         ]);
         $data = $request->only(['name','des','status']);
-        $category->insert($data);
+        $category->create($data);
         return back()->with('message', 'Save Successfully');
     }
 

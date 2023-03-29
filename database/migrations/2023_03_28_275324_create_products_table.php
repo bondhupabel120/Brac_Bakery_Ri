@@ -21,11 +21,12 @@ class CreateProductsTable extends Migration
             $table->decimal('price',8,2); //99999.9
             $table->decimal('sale_price',8,2)-> nullable(); 
             $table->integer('quantity'); 
-            $table->string('category'); 
-            $table->string('type'); 
-            $table->string('image');
+            $table->string('category')->nullable(); 
+            $table->string('type')->nullable(); 
+            $table->string('image')->nullable();
             $table->string('image1')-> nullable(); 
             $table->string('image2')-> nullable(); 
+            $table->tinyInteger('status')->default(1)->nullable()->comment('1=>Active, 0 =>Deactive');
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Libraries\CommonFunction;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -28,7 +29,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.add_product');
+        $categories = Category::where('status',1)->orderby('id','asc')->get();
+        return view('admin.product.add_product',compact('categories'));
     }
 
     /**
@@ -41,9 +43,19 @@ class ProductController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255',
+            'category_id' => 'required',
         ]);
-        $data = $request->only(['name','des','status']);
-        $product->insert($data);
+        $post = $request->only('category_id','name', 'description','price','sale_price','quantity','status');
+        $image = CommonFunction::file_upload($request, 'image', 'product');
+        $image1 = CommonFunction::file_upload($request, 'image1', 'product');
+        $image2 = CommonFunction::file_upload($request, 'image2', 'product');
+        $postData = array_merge($post, [
+            'image' => $image,
+            'image1' => $image1,
+            'image2' => $image2,
+        ]);
+
+        $product->create($postData);
         return back()->with('message', 'Save Successfully');
     }
 
@@ -70,8 +82,12 @@ class ProductController extends Controller
                     return CommonFunction::getStatus($list->status);
                 })
 
-                ->editColumn('des', function ($list) {
-                    return strip_tags(html_entity_decode($list->des));
+                ->editColumn('image', function ($list) {
+                    return CommonFunction::getImageFromURL($list->image);
+                })
+
+                ->editColumn('description', function ($list) {
+                    return strip_tags(html_entity_decode($list->description));
                 })
                 
                 ->addColumn('action', function ($list) {
@@ -79,7 +95,7 @@ class ProductController extends Controller
                         <a href="javascript:void(0);" style="padding:2px; font-size:15px; color: #fff" class="btn btn-danger btn-xs pl-1 pr-1" id="' . $list->id . '" onClick="deleteproduct(this.id,event)"> <i class="fas fa-trash"></i></a>';
                 })
                 ->addIndexColumn()
-                ->rawColumns(['status', 'des', 'action'])
+                ->rawColumns(['status','image', 'description', 'action'])
                 ->make(true);
         } catch (\Exception $e) {
             // Session::flash('error', CommonFunction::showErrorPublic($e->getMessage()) . '[UC-1001]');
@@ -96,10 +112,11 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
+        $categories = Category::where('status',1)->orderby('id','asc')->get();
         if(!$product){
             abort(403,'Not Found');
         }
-        return view('admin.product.edit_product',compact('product'));
+        return view('admin.product.edit_product',compact('product','categories'));
     }
 
     /**
@@ -116,7 +133,23 @@ class ProductController extends Controller
             abort(403,'product Not Found');
         }
         $product->name = $request->name;
-        $product->des = $request->des;
+        $product->category_id = $request->category_id;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->sale_price = $request->sale_price;
+        $product->description = $request->description;
+        if($request->image){
+            @unlink($product->image);
+            $product->image = CommonFunction::file_upload($request, 'image', 'product');
+        }
+        if($request->image1){
+            @unlink($product->image1);
+            $product->image1 = CommonFunction::file_upload($request, 'image1', 'product');
+        }
+        if($request->image2){
+            @unlink($product->image2);
+            $product->image2 = CommonFunction::file_upload($request, 'image2', 'product');
+        }
         $product->status = $request->status;
         $product->save();
         return redirect()->route('product.index')->with('message', 'product Updated Successfully');
@@ -133,6 +166,11 @@ class ProductController extends Controller
         $product = Product::find($id);
         if(!$product){
             abort(403,'product Not Found');
+        }
+        else{
+            @unlink($product->image);
+            @unlink($product->image1);
+            @unlink($product->image2);
         }
         $product->delete();
         return back()->with('message', 'Deleted Successfully');

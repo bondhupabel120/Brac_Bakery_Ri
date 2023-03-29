@@ -42,14 +42,14 @@
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item">
-        <a class="nav-link collapsed panel-heading-two" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed panel-heading-two" href="#" data-toggle="collapse" data-target="#collapseProduct"
+            aria-expanded="true" aria-controls="collapseProduct">
             <i class="fas fa-users"></i>
             <span>Product</span>
         </a>
-        <div id="collapseTwo"
+        <div id="collapseProduct"
             class="collapse
-        {{ Request::is('admin/category') || Request::is('admin/category/*') ? 'collapse show' : '' }}
+        {{ Request::is('admin/product') || Request::is('admin/product/*') ? 'collapse show' : '' }}
         "
             aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded ">

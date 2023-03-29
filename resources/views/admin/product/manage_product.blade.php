@@ -34,7 +34,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Title</th>
+                                        <th>Name</th>
                                         <th>Image</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -71,7 +71,7 @@
                },
                columns: [
                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                   {data: 'title', name: 'title'},
+                   {data: 'name', name: 'name'},
                    {data: 'image', name: 'image'},
                    {data: 'status', name: 'status'},
                    {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -102,7 +102,7 @@
                     }).then(function() {
                         location.reload();
                         $.ajax({
-                            url: "/admin/category",
+                            url: "/admin/product",
                             method: "DELETE",
                             data: {
                                 id: id,

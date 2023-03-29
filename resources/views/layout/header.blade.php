@@ -32,7 +32,7 @@
     <!-- Navbar Start -->
     <div class="container-fluid p-0 nav-bar">
         <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
-            <a href="home" class="navbar-brand px-lg-4 m-0">
+            <a href="/" class="navbar-brand px-lg-4 m-0">
                 <h1 class="m-0 display-4 text-uppercase text-white">FUDGE</h1>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -40,9 +40,9 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-4">
-                    <a href="{{ url('home') }}" class="nav-item nav-link active">Home</a>
-                    <a href="{{ url('about') }}" class="nav-item nav-link">About</a>
-                    <a href="{{ url('products') }}" class="nav-item nav-link">Menu</a>
+                    <a href="{{ url('/') }}" class="nav-item nav-link @if(Request::is('/')) active @endif">Home</a>
+                    <a href="{{ url('about') }}" class="nav-item nav-link @if(Request::is('about')) active @endif">About</a>
+                    <a href="{{ url('products') }}" class="nav-item nav-link @if(Request::is('products')) active @endif">Menu</a>
                     {{-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu text-capitalize">
@@ -50,12 +50,12 @@
                             <a href="#bottom" class="dropdown-item">Testimonial</a>
                         </div>
                     </div> --}}
-                    <a href="{{ url('contact') }}" class="nav-item nav-link">Contact</a>
+                    <a href="{{ url('contact') }}" class="nav-item nav-link @if(Request::is('contact')) active @endif">Contact</a>
                     @if (Auth::check())
                         <a href="{{ url('/main/successlogin') }}" class="nav-item nav-link">{{ Auth::user()->name }}</a>
                         <a href="{{ url('/main/logout') }}" class="nav-item nav-link">Logout</a>
                     @else
-                        <a href="{{ url('login') }}" class="nav-item nav-link">Login</a>
+                        <a href="{{ url('login') }}" class="nav-item nav-link @if(Request::is('login')) active @endif">Login</a>
                     @endif
                 </div>
             </div>

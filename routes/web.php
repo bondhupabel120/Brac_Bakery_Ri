@@ -56,6 +56,7 @@ return view('single_products');
 });
 
 Route:: get('/products',[ProjectController::class,'products'])->name('products');
+Route:: get('/product/details/{id}',[ProjectController::class,'productDetails'])->name('product_details');
 
 
 Route:: get('/about',function(){

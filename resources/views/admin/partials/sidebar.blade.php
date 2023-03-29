@@ -33,7 +33,7 @@
         "
             aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded ">
-                <a class="collapse-item text-dark @if (request()->path() == 'admin/category') bg-info @endif"
+                <a class="collapse-item text-dark @if (request()->path() == 'admin/category/create') bg-info @endif"
                     href="{{ route('category.create') }}">Add Category</a>
                 <a class="collapse-item text-dark @if (request()->path() == 'admin/category') bg-info @endif"
                     href="{{ route('category.index') }}">Manage Category</a>
@@ -44,7 +44,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed panel-heading-two" href="#" data-toggle="collapse" data-target="#collapseProduct"
             aria-expanded="true" aria-controls="collapseProduct">
-            <i class="fas fa-users"></i>
+            <i class="fab fa-product-hunt"></i>
             <span>Product</span>
         </a>
         <div id="collapseProduct"
@@ -53,7 +53,7 @@
         "
             aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded ">
-                <a class="collapse-item text-dark @if (request()->path() == 'admin/product') bg-info @endif"
+                <a class="collapse-item text-dark @if (request()->path() == 'admin/product/create') bg-info @endif"
                     href="{{ route('product.create') }}">Add Product</a>
                 <a class="collapse-item text-dark @if (request()->path() == 'admin/product') bg-info @endif"
                     href="{{ route('product.index') }}">Manage Product</a>

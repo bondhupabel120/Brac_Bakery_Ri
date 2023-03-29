@@ -23,11 +23,9 @@
                 <h1 class="display-4">Competitive Pricing</h1>
             </div>
             <div class="row">
-                @foreach($categories as $category)
-                <div class="col-lg-6">
-                    <h1 class="mb-5">{{$category->name}}</h1>
-                    @if($category->products)
-                    @foreach($category->products as $product)
+                <div class="col-lg-12">
+                    <h1 class="mb-5">{{$product->rcategory ? $product->rcategory->name : ''}}</h1>
+                    
                     <div class="row align-items-center mb-5">
                         <div class="col-4 col-sm-3">
                             <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{ asset ($product->image)}}" alt="">
@@ -38,11 +36,13 @@
                             <p class="m-0">{{strip_tags(html_entity_decode($product->description))}}</p>
                         </div>
                     </div>
-                    @endforeach
-                    @endif
-                    
                 </div>
-                @endforeach
+                <div class="col-lg-12">
+                    <div class="row gap-2">
+                        <img class="img-thumbnail" src="{{asset($product->image1)}}" alt="">
+                        <img class="img-thumbnail" src="{{asset($product->image2)}}" alt="">
+                    </div>
+                </div>
                 
             </div>
         </div>

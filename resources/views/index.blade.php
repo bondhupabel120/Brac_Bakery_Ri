@@ -176,76 +176,63 @@
                 <h1 class="display-4">Competitive Pricing</h1>
             </div>
             <div class="row">
+                @foreach($categories as $category)
                 <div class="col-lg-6">
-                    <h1 class="mb-5">Cakes</h1>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{ asset ('img/black-forest-cake.jpg')}}" alt="">
-                            <h5 class="menu-price">$5</h5>
+                    <h1 class="mb-5">{{$category->name}}</h1>
+                    @if($category->products)
+                    @foreach($category->products as $product)
+                    <a href="{{route('product_details',['id'=>$product->id])}}">
+                        <div class="row align-items-center mb-5">
+                            <div class="col-4 col-sm-3">
+                                <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{ asset ($product->image)}}" alt="">
+                                <h5 class="menu-price">${{intval($product->sale_price)}}</h5>
+                            </div>
+                            <div class="col-8 col-sm-9">
+                                <h4>{{$product->name}}</h4>
+                                <p class="m-0">{{strip_tags(html_entity_decode($product->description))}}</p>
+                            </div>
                         </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Black Forest Cake</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{ asset ('img/vanilla-cake.jpg')}}" alt="">
-                            <h5 class="menu-price">$7</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Vanilla Cake</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{ asset ('img/red-velvet-cake.jpg')}}" alt="">
-                            <h5 class="menu-price">$9</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Red Velvet Cake</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                        </div>
-                    </div>
+                    </a>
+                    @endforeach
+                    @endif
+                    
                 </div>
-                <div class="col-lg-6">
-                    <h1 class="mb-5">Cupcakes</h1>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{ asset ('img/chocolate-cupcakes.jpg')}}" alt="">
-                            <h5 class="menu-price">$5</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Mocha Cupcake</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{ asset ('img/mocha-cupcake.jpg')}}" alt="">
-                            <h5 class="menu-price">$7</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Oreo Cupcake</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{ asset ('img/oreo-cupcake.jpg')}}" alt="">
-                            <h5 class="menu-price">$9</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Vanilla Cupcake</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+                
             </div>
         </div>
     </div>
     <!-- Menu End -->
+        @if($cookie_products->count() > 0)
+    <div class="container-fluid pt-5">
+        <div class="container">
+            <div class="section-title">
+                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Recent Viewed Products</h4>
+            </div>
+            <div class="row">
+                @foreach($cookie_products as $product)
+                <div class="col-lg-6">
+                    
+                    <a href="{{route('product_details',['id'=>$product->id])}}">
+                        <div class="row align-items-center mb-5">
+                            <div class="col-4 col-sm-3">
+                                <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{ asset ($product->image)}}" alt="">
+                                <h5 class="menu-price">${{intval($product->sale_price)}}</h5>
+                            </div>
+                            <div class="col-8 col-sm-9">
+                                <h4>{{$product->name}}</h4>
+                                <p class="m-0">{{strip_tags(html_entity_decode($product->description))}}</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                </div>
+                @endforeach
+                
+            </div>
+        </div>
+    </div>
+    @endif
 
 
     <!-- Reservation Start -->

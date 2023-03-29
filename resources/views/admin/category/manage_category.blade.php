@@ -101,11 +101,11 @@
                     }).then(function() {
                         location.reload();
                         $.ajax({
-                            url: "/admin/category",
+                            url: "/admin/category/"+id,
                             method: "DELETE",
                             data: {
                                 id: id,
-                                "_token": "{{ csrf_token() }}"
+                                "_token": "{{ csrf_token() }}",
                             },
                             dataType: 'json',
                             success: function() {
@@ -114,7 +114,7 @@
                         })
                     })
                 } else if (result.value == false) {
-                    swal.fire("Cancelled", "News Category is safe :)", "error");
+                    swal.fire("Cancelled", "Category is safe :)", "error");
                 }
             })
         }

@@ -16,7 +16,7 @@ if (input.files && input.files[0]) {
         return false;
     }
     //image size validation
-    var max_size = .3;
+    var max_size = 3;
     var file_size = parseFloat(input.files[0].size / (1024 * 1024)).toFixed(1); // MB calculation
     if (file_size > max_size) {
         input.value = '';

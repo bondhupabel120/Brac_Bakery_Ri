@@ -85,17 +85,13 @@ class ProductController extends Controller
                 ->editColumn('image', function ($list) {
                     return CommonFunction::getImageFromURL($list->image);
                 })
-
-                ->editColumn('description', function ($list) {
-                    return strip_tags(html_entity_decode($list->description));
-                })
                 
                 ->addColumn('action', function ($list) {
                     return '<a style="padding:2px;font-size:15px;" href="' . route('product.edit', ['product' => $list->id]) . '" class="btn btn-primary btn-xs pl-1 pr-1"> <i class="fa fa-edit"></i> </a>
                         <a href="javascript:void(0);" style="padding:2px; font-size:15px; color: #fff" class="btn btn-danger btn-xs pl-1 pr-1" id="' . $list->id . '" onClick="deleteproduct(this.id,event)"> <i class="fas fa-trash"></i></a>';
                 })
                 ->addIndexColumn()
-                ->rawColumns(['status','image', 'description', 'action'])
+                ->rawColumns(['status','image', 'action'])
                 ->make(true);
         } catch (\Exception $e) {
             // Session::flash('error', CommonFunction::showErrorPublic($e->getMessage()) . '[UC-1001]');

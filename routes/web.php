@@ -20,11 +20,12 @@ use App\Http\Controllers\PaymentController;
 Route::get('/', [ProjectController::class,'index']);
 
 
-Route:: get('/home',function(){
+// Route:: get('/home',function(){
 
-    return view('index');
+//     return view('index');
     
-    });
+//     });
+Route:: get('/home',[ProjectController::class,'index'])->name('index');
 Route:: get('/testimonial',function(){
 
         return view('layout.testimonial');
@@ -84,12 +85,13 @@ Route:: get('/cart', [CartController::class, 'cart'])->name('cart');
 
 Route::post('/plus_cart_item', [CartController::class, 'plus_cart_item' ])-> name('plus_cart_item');
 Route::post('/minus_cart_item', [CartController::class, 'minus_cart_item' ])-> name('minus_cart_item');
-Route::post('/add_to_cart', [CartController::class, 'add_to_cart' ])-> name('add_to_cart');
-Route:: get('/add_to_cart', function(){
+// Route::post('/add_to_cart', [CartController::class, 'add_to_cart' ])-> name('add_to_cart');
+Route::get('/add_to_cart/{id}', [CartController::class, 'add_to_cart' ])-> name('add_to_cart');
+// Route:: get('/add_to_cart', function(){
 
-    return redirect('/');
+//     return redirect('/');
 
-});
+// });
 
 
 Route::post('/remove_from_cart', [CartController::class, 'remove_from_cart' ])-> name('remove_from_cart');

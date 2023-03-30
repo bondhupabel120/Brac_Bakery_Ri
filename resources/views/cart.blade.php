@@ -34,7 +34,7 @@
                     @foreach ($carts as $cart)
                         <tr>
                             <td>
-                                <img class="w-50 rounded-circle mb-3 mb-sm-0" src="{{ asset('img/' . $cart->products->image ?? 'img/chocolate-cake.jpg') }}" alt="">
+                                <img class="w-50 rounded-circle mb-3 mb-sm-0" src="{{ asset($cart->products->image ?? 'img/chocolate-cake.jpg') }}" alt="">
                             </td>
                             <td>{{ $cart->products->name ?? '' }}</td>
                             <td>

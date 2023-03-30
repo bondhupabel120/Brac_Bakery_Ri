@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Session;
 use Auth;
@@ -16,17 +17,19 @@ class CartController extends Controller
         return view('cart');
     }
 
-    public function add_to_cart(Request $request)
+    // public function add_to_cart(Request $request)
+    public function add_to_cart($id)
     {
         if (Auth::user()) {
-            $product_check = Cart::where('product_id', $request->product_id)->first();
+            $product = Product::find($id);
+            $product_check = Cart::where('product_id', $id)->first();
             if (!$product_check) {
                 Cart::create([
-                    'product_id' => $request->product_id,
+                    'product_id' => $id,
                     'user_id' => Auth::user()->id,
-                    'price' => $request->price,
-                    'qty' => $request->qty,
-                    'total_price' => $request->qty * $request->price,
+                    'price' => $product->sale_price,
+                    'qty' => 1,
+                    'total_price' => 1 * $product->sale_price,
                 ]);
             }
             $carts = Cart::where('user_id', Auth::user()->id)->get();

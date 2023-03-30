@@ -67,11 +67,11 @@
                     @foreach ($orders as $order)
                         <tr>
                             <td>
-                                <img class="w-50 rounded-circle mb-3 mb-sm-0" style="height: 50px" src="{{ asset('img/' . $order->products->image ?? 'img/chocolate-cake.jpg') }}" alt="">
+                                <img class="w-50 rounded-circle mb-3 mb-sm-0" style="height: 50px" src="{{ asset($order->products->image ?? 'img/chocolate-cake.jpg') }}" alt="">
                             </td>
                             <td>{{ $order->products->name ?? '' }}</td>
                             <td>{{ $order->qty }}</td>
-                            <td>{{ $order->price }}</td>
+                            <td>{{ $order->products->sale_price }}</td>
                         </tr>
                     @endforeach
                 </tbody>

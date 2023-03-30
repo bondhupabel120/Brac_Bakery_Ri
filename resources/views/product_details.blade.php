@@ -33,7 +33,8 @@
                         </div>
                         <div class="col-8 col-sm-9">
                             <h4>{{$product->name}}</h4>
-                            <p class="m-0">{{strip_tags(html_entity_decode($product->description))}}</p>
+                            <a href="{{ route('add_to_cart',['id'=>$product->id]) }}" class="btn btn-info">Add to Cart</a>
+                            <p class="m-0 pt-2">{{strip_tags(html_entity_decode($product->description))}}</p>
                         </div>
                     </div>
                 </div>

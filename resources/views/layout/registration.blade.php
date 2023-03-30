@@ -60,7 +60,7 @@
             <p class="text-danger" for="">If you have an account, please login! <a href="{{ url('login') }}">Click Here</a></p>
         </div>
         <div class="form-group">
-            <input type="submit" name="login" class="btn btn-primary" value="Login" />
+            <input type="submit" name="login" class="btn btn-primary" value="Register" />
         </div>
     </form>
 </div>

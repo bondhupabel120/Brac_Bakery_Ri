@@ -31,7 +31,7 @@
             @foreach ($all_carts as $all_cart)
                 <input type="hidden" name="product_id[]" value="{{ $all_cart->products->id }}">
                 <input type="hidden" name="qty[]" value="{{ $all_cart->qty }}">
-                <input type="hidden" name="price[]" value="{{ $all_cart->price }}">
+                <input type="hidden" name="price[]" value="{{ $all_cart->sale_price }}">
             @endforeach
             <div class="form-group checkout-small-element">
                 <label for="">Name</label>

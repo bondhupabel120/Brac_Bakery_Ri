@@ -52,7 +52,7 @@
         $value = Cookie::get('COOKIE_NAME')
     ?>
     {{-- {{ $cookie_id }} --}}
-    {{ $value }}
+    {{-- {{ $value }} --}}
 
     <!-- About Start -->
     <div class="container-fluid py-5">
@@ -181,7 +181,7 @@
                     <h1 class="mb-5">{{$category->name}}</h1>
                     @if($category->products)
                     @foreach($category->products as $product)
-                    <a href="{{route('product_details',['id'=>$product->id])}}">
+                    <a style="text-decoration: none" href="{{route('product_details',['id'=>$product->id])}}">
                         <div class="row align-items-center mb-5">
                             <div class="col-4 col-sm-3">
                                 <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{ asset ($product->image)}}" alt="">
@@ -203,7 +203,7 @@
         </div>
     </div>
     <!-- Menu End -->
-        @if($cookie_products->count() > 0)
+        @if(count($cookie_products) > 0)
     <div class="container-fluid pt-5">
         <div class="container">
             <div class="section-title">
@@ -213,7 +213,7 @@
                 @foreach($cookie_products as $product)
                 <div class="col-lg-6">
                     
-                    <a href="{{route('product_details',['id'=>$product->id])}}">
+                    <a style="text-decoration: none"  href="{{route('product_details',['id'=>$product->id])}}">
                         <div class="row align-items-center mb-5">
                             <div class="col-4 col-sm-3">
                                 <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{ asset ($product->image)}}" alt="">

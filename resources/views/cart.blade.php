@@ -39,7 +39,7 @@
                             <td>{{ $cart->products->name ?? '' }}</td>
                             <td>
                                 <input type="hidden" name="product_id[]" value="{{ $cart->products->id }}">
-                                <input type="hidden" name="price[]" value="{{ $cart->products->price }}">
+                                <input type="hidden" name="price[]" value="{{ $cart->products->sale_price }}">
                                 <input type="number" name="qty[]" min="1" max="1000" class="form-control" value="{{ $cart->qty }}" style="height: 35px">
                             </td>
                             {{-- <td>

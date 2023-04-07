@@ -178,27 +178,25 @@
             <div class="row">
                 @foreach($categories as $category)
                 <div class="col-lg-6">
-                    <h1 class="mb-5">{{$category->name}}</h1>
-                    @if($category->products)
-                    @foreach($category->products as $product)
-                    <a style="text-decoration: none" href="{{route('product_details',['id'=>$product->id])}}">
-                        <div class="row align-items-center mb-5">
-                            <div class="col-4 col-sm-3">
-                                <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{ asset ($product->image)}}" alt="">
-                                <h5 class="menu-price">${{intval($product->sale_price)}}</h5>
+                    @if(count($category->products) > 0)
+                        <h1 class="mb-5">{{$category->name}}</h1>
+                        @foreach($category->products->take(2) as $product)
+                        <a style="text-decoration: none" href="{{route('product_details',['id'=>$product->id])}}">
+                            <div class="row align-items-center mb-5">
+                                <div class="col-4 col-sm-3">
+                                    <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{ asset ($product->image)}}" alt="">
+                                    <h5 class="menu-price">${{intval($product->sale_price)}}</h5>
+                                </div>
+                                <div class="col-8 col-sm-9">
+                                    <h4>{{$product->name}}</h4>
+                                    <p class="m-0">{{strip_tags(html_entity_decode($product->description))}}</p>
+                                </div>
                             </div>
-                            <div class="col-8 col-sm-9">
-                                <h4>{{$product->name}}</h4>
-                                <p class="m-0">{{strip_tags(html_entity_decode($product->description))}}</p>
-                            </div>
-                        </div>
-                    </a>
-                    @endforeach
+                        </a>
+                        @endforeach
                     @endif
-                    
                 </div>
                 @endforeach
-                
             </div>
         </div>
     </div>

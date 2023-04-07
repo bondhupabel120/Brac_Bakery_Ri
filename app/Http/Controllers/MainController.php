@@ -81,7 +81,7 @@ class MainController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ])) {
-            return redirect('home');
+            return redirect('products');
         } else {
             return back()->withErrors('Something error, please try again!');
         }

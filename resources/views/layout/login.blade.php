@@ -146,7 +146,7 @@
                     </label>
                 </div>
                 <div class="form-group">
-                    <p class="text-danger" for="">If you no ccount, please registration first! <a href="{{ route('user.registration') }}">Click Here</a></p>
+                    <p class="text-danger" for="">If you no account, please registration first! <a href="{{ route('user.registration') }}">Click Here</a></p>
                 </div>
                 <div class="form-group">
                     <input type="submit" name="login" class="btn btn-primary" value="Login" />

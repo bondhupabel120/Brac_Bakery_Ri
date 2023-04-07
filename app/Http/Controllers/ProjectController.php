@@ -24,7 +24,7 @@ class ProjectController extends Controller
                         }
                     }
                 }
-            })->get();
+            })->limit(6)->get();
         } else {
             $cookie_products = [];
         }

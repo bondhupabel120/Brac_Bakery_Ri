@@ -17,7 +17,6 @@ class CartController extends Controller
         return view('cart');
     }
 
-    // public function add_to_cart(Request $request)
     public function add_to_cart($id)
     {
         if (Auth::user()) {

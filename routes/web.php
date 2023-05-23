@@ -17,7 +17,7 @@ use App\Http\Controllers\PaymentController;
 |
 */
 
-Route::get('/', [ProjectController::class,'index']);
+Route::get('/', [ProjectController::class,'index'])->name('index');
 
 
 // Route:: get('/home',function(){
@@ -125,11 +125,11 @@ Route::get('/success',function(){
     
     })->name('layout.success');
 
-    Route:: get('/home',function(){
+    // Route:: get('/home',function(){
 
-        return view('index');
+    //     return view('index');
         
-        })->name('layout.home');
+    //     })->name('layout.home');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

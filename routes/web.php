@@ -25,7 +25,7 @@ Route::get('/', [ProjectController::class,'index']);
 //     return view('index');
     
 //     });
-Route:: get('/home',[ProjectController::class,'index'])->name('index');
+// Route:: get('/home',[ProjectController::class,'index'])->name('index');
 Route:: get('/testimonial',function(){
 
         return view('layout.testimonial');

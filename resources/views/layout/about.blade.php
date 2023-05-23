@@ -38,18 +38,23 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-4">
-                    <a href="home" class="nav-item nav-link">Home</a>
-                    <a href="about" class="nav-item nav-link active">About</a>
-                    <a href="login" class="nav-item nav-link">Login</a>
-                    <a href="products" class="nav-item nav-link">Menu</a>
-                    <div class="nav-item dropdown">
+                    <a href="{{ url('/') }}" class="nav-item nav-link @if(Request::is('/')) active @endif">Home</a>
+                    <a href="{{ url('about') }}" class="nav-item nav-link @if(Request::is('about')) active @endif">About</a>
+                    <a href="{{ url('products') }}" class="nav-item nav-link @if(Request::is('products')) active @endif">Menu</a>
+                    {{-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu text-capitalize">
-                            <a href="reservation" class="dropdown-item">Reservation</a>
-                            <a href="testimonial" class="dropdown-item">Testimonial</a>
+                            <a href="reservation.html" class="dropdown-item">Reservation</a>
+                            <a href="#bottom" class="dropdown-item">Testimonial</a>
                         </div>
-                    </div>
-                    <a href="contact" class="nav-item nav-link">Contact</a>
+                    </div> --}}
+                    <a href="{{ url('contact') }}" class="nav-item nav-link @if(Request::is('contact')) active @endif">Contact</a>
+                    @if (Auth::check())
+                        <a href="{{ url('/main/successlogin') }}" class="nav-item nav-link">{{ Auth::user()->name }}</a>
+                        <a href="{{ url('/main/logout') }}" class="nav-item nav-link">Logout</a>
+                    @else
+                        <a href="{{ url('login') }}" class="nav-item nav-link @if(Request::is('login')) active @endif">Login</a>
+                    @endif
                 </div>
             </div>
         </nav>
